@@ -108,28 +108,54 @@ class UnrolledLinkedList{
         }
 
         void DeleteElement(int n){
-            if (head == nullptr){                                                                       //If the head points to null
-                cout << "The list is empty" << endl;                                                    //Print the statement
+            if (head == nullptr) { 
+                cout << "The list is empty" << endl;
             } else {
-
-                Node *walker = head;                                                                    //Make a walker pointer that will point to current position
-
-                while(walker != nullptr){                                                               //While the walker is not null
-                    for(int i = 0; i < walker->numElements; i++){                                       //Iterate through the elements of the array
-                        if(walker->array[i] == n){                                                      //If the walker array data matches the taken in value
-                            for(int j = 0; j < walker->numElements; j++){                               //Iterate through the array
-                                walker->array[j] = walker->array[j+1];                                  //Shift all elements one index to the left
+                Node *walker = head;
+                while (walker != nullptr) {
+                    for (int i = 0; i < walker->numElements; i++) {
+                        if (walker->array[i] == n) {
+                            for (int j = i; j < walker->numElements - 1; j++) {
+                                walker->array[j] = walker->array[j + 1];
                             }
-                        walker->numElements--;                                                          //Decrement total number of elements in the array
-                        cout << "The input " << n << " has been deleted from the node." << endl;        //Print the statement
-                        return;                                                                         //Return
+                            walker->numElements--;
+                            cout << "The input " << n << " has been deleted from the node." << endl;
+                            return;
                         }
                     }
-                    walker = walker->next;                                                              //move walker down the array
+                    walker = walker->next;
                 }
+                cout << "The input " << n << " was not found in the list." << endl;
             }
         }
 
+        
+        
+        #pragma region ORIGINAL
+        //     if (head == nullptr){                                                                       //If the head points to null
+        //         cout << "The list is empty" << endl;                                                    //Print the statement
+        //     } else {
+
+        //         Node *walker = head;                                                                    //Make a walker pointer that will point to current position
+
+        //         while(walker != nullptr){                                                               //While the walker is not null
+        //             for(int i = 0; i < walker->numElements; i++){                                       //Iterate through the elements of the array
+        //                 if(walker->array[i] == n){                                                      //If the walker array data matches the taken in value
+        //                      for(int j = 0; j < walker->numElements; j++){                               //Iterate through the array
+        //                         walker->array[j] = walker->array[j+1];                                  //Shift all elements one index to the left
+        //                     }
+        //                 walker->numElements--;                                                          //Decrement total number of elements in the array
+        //                 cout << "The input " << n << " has been deleted from the node." << endl;        //Print the statement
+        //                 return;                                                                         //Return
+        //                 }
+        //             }
+        //             walker = walker->next;                                                              //move walker down the array
+        //         }
+        //     }
+        // }
+        #pragma endregion
+        
+        
         void DeleteNode(int n){
             if (head == nullptr){                                                                       //If the head points to null
                 cout << "The list is empty" << endl;                                                    //Print the statement
@@ -147,7 +173,7 @@ class UnrolledLinkedList{
                             prev->next = walker->next;                                                  //Update prev->next to skip over the node to be deleted
                         }
                         delete walker;                                                                  //Delete the node containing the target element
-                        cout << "Node " << n << " has been deleted." << endl;                       //Print the statement
+                        cout << "Node " << n << " has been deleted." << endl;                           //Print the statement
                         return;                                                                         //Exit the function after deleting the node
                     }
                 }
@@ -158,27 +184,22 @@ class UnrolledLinkedList{
     }
 };
 
-
-
-
-
-
 int main(){
 
     UnrolledLinkedList ull(3);
 
-    for (int i = 0; i < 37; i++){
+    for (int i = 0; i < 10; i++){
         cout << "Entered element is : " << i << endl;
         ull.Insert(i);
         ull.Print();
         cout << endl;
     }
 
-    ull.Search(3);
-    ull.Search(30);
+    ull.Search(300);
+    ull.Search(8);
 
     ull.DeleteNode(2);
-    ull.DeleteElement(5);
+    ull.DeleteElement(4);
 
     cout << endl;
 
